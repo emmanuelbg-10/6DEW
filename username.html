@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Hola <span id="user">--</span></h1>
+  <button onclick="deleteUser()">Borrar usuario</button>
+  <script>
+    let user;
+    const userSpan = document.getElementById('user');
+    function setUser() {
+      
+    
+    if(localStorage.user){
+      user = localStorage.user;
+    } else {
+      user = prompt("Dime tu nombre");
+      localStorage.user = user || '';
+    }
+    userSpan.textContent = user;
+
+  }
+
+    function deleteUser(){
+      localStorage.removeItem('user')
+      setUser();
+    }
+
+    setUser();
+  </script>
+</body>
+</html>

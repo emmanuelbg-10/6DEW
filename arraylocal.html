@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    li:hover {
+      text-decoration: line-through;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Listado de frutas</h1>
+  <p>
+    <input type="text" id="fruit">
+  </p>
+  <ul id="fruits"></ul>
+  <script>
+    const fruitInput = document.getElementById('fruit');
+    const fruitList = document.getElementById('fruits');
+
+    function addFruit(fruit) {
+      const li = document.createElement('li');
+      li.textContent = fruit;
+      fruitList.append(li);
+    }
+
+    fruitInput.addEventListener('keypress', (e) => {
+      console.log(e.key)
+      if(e.key == 'Enter'){
+        addFruit(fruitInput.value);
+        fruitInput.value = "";
+        setFruitsInLocalStorage();
+      }
+    });
+
+    function setFruitsInLocalStorage() {
+      const fruits = [...fruitList.children].map(f => f.textContent);
+      console.log(fruits);
+      localStorage.fruits = JSON.stringify(fruits);
+    }
+
+    function getFruitsFromLocalStorage() {
+      let fruits = [];
+      if(localStorage.fruits) {
+        fruits = JSON.parse(localStorage.fruits);
+      }
+      fruits.forEach(f => addFruit(f));
+      console.log(fruits);
+    }
+
+    getFruitsFromLocalStorage();
+
+    fruitList.addEventListener('click', (e) => {
+      if(e.target.tagName == 'LI') {
+        e.target.remove();
+        setFruitsInLocalStorage();
+      }
+    });
+
+  </script>
+</body>
+</html>

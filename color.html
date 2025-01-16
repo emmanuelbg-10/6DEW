@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="color" name="color" id="color">
+  <input type="button" value="Resetear Fondo" id="reset">
+
+
+  <script>
+    const color = document.getElementById('color');
+    const body=document.querySelector('body')
+    
+    body.style.backgroundColor = localStorage.color
+    color.addEventListener('input', (e) => {
+    localStorage.color = color.value;
+      body.style.backgroundColor = localStorage.color
+    });
+  </script>
+</body>
+</html>
